@@ -1,0 +1,33 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+p {
+    margin: 0;
+}
+
+.banner-section {
+    background-image: url(https://cdn.shopify.com/s/files/1/0286/1214/files/april-homepage-aventon-crew-1600x800px.jpg?v=1649460667);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    height: calc(100vh - 56px);
+}
+
+.banner-info {
+    text-align: center;
+    padding: 30px;
+    background: linear-gradient(to right, #e0dde0, #d8d4d0);
+    border-radius: 4px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    -ms-border-radius: 4px;
+    -o-border-radius: 4px;
+}
