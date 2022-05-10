@@ -5,6 +5,7 @@ import Home from './components/Home/Home';
 import { Route, Routes } from 'react-router-dom';
 import Login from './components/Login/Login';
 import Signup from './components/Signup/Signup';
+import UpdateCycleDetails from './components/UpdateCycleDetails/UpdateCycleDetails';
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
       <Header />
       <Routes>
         <Route path='/' element={<Home />}></Route>
+        <Route path='/update-details/:id' element={<UpdateCycleDetails />}></Route>
         <Route path='/login' element={<Login />}></Route>
         <Route path='/signup' element={<Signup />}></Route>
       </Routes>
