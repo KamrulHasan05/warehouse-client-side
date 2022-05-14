@@ -7,6 +7,7 @@ import Login from './components/Login/Login';
 import Signup from './components/Signup/Signup';
 import UpdateCycleDetails from './components/UpdateCycleDetails/UpdateCycleDetails';
 import ManageInventory from './components/ManageInventory/ManageInventory';
+import AddProduct from './components/AddProduct/AddProduct';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path='/' element={<Home />}></Route>
         <Route path='/update-details/:id' element={<UpdateCycleDetails />}></Route>
         <Route path='/manage-inventory' element={<ManageInventory />}></Route>
+        <Route path='/add-product' element={<AddProduct />}></Route>
         <Route path='/login' element={<Login />}></Route>
         <Route path='/signup' element={<Signup />}></Route>
       </Routes>

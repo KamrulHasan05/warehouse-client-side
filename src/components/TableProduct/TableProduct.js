@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import { Modal, Button } from 'react-bootstrap';
 import { FaTrash, FaEdit } from "react-icons/fa";
-import useManageProduct from './../useManageProduct';
+import { useNavigate } from 'react-router-dom';
 
 const TableProduct = ({ product, index }) => {
-    const [products, state, setProducts, setState] = useManageProduct()
+
     const [show, setShow] = useState(false);
     const { _id, image, name, price, quantity } = product;
+
+    const navigate = useNavigate()
 
     const handleDelete = id => {
         const handleClose = () => setShow(false);
@@ -15,13 +17,7 @@ const TableProduct = ({ product, index }) => {
             method: 'DELETE'
         })
             .then(res => res.json())
-            .then(data => {
-                if (data.acknowledged === true) {
-                    const restProducts = products.filter(product => product._id !== id);
-                    setProducts(restProducts);
-                    setState(!state);
-                }
-            });
+            .then(data => console.log(data));
         handleClose()
     }
 
@@ -37,16 +33,15 @@ const TableProduct = ({ product, index }) => {
                 <td style={{ verticalAlign: 'middle' }}>{price}</td>
                 <td style={{ verticalAlign: 'middle' }}>{quantity}</td>
                 <td style={{ verticalAlign: 'middle' }}>
-                    <span className='text-success btn'><FaEdit /></span>
+                    <span className='text-success btn' onClick={() => navigate(`/update-details/${_id}`)}><FaEdit /></span>
                     <span className='text-danger btn' onClick={handleShow} ><FaTrash /></span>
                 </td>
             </tr>
             <Modal show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Modal heading</Modal.Title>
+                    <Modal.Title>Are you confirm to delete this product?</Modal.Title>
                 </Modal.Header>
-                <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
-                <Modal.Footer>
+                <Modal.Footer className='justify-content-center'>
                     <Button variant="secondary" onClick={handleClose}>
                         Close
                     </Button>
