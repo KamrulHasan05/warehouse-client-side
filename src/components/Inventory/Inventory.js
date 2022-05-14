@@ -1,14 +1,20 @@
 import React, { useEffect, useState } from 'react';
+import Loading from '../Loading/Loading';
 import SingleCycle from '../SingleCycle/SingleCycle';
+import { useNavigate } from 'react-router-dom';
 
 const Inventory = () => {
-    const [cycles, setCycles] = useState([])
+    const [cycles, setCycles] = useState([]);
+    const navigate = useNavigate()
+
     useEffect(() => {
         fetch('http://localhost:5000/product')
             .then(res => res.json())
             .then(data => setCycles(data))
     }, [])
-
+    if (cycles.length === 0) {
+        return <Loading />
+    }
     return (
         <section className='pt-5'>
             <div className="container">
@@ -22,7 +28,7 @@ const Inventory = () => {
                     }
                 </div>
                 <div className="manage-inventory mt-5 text-center">
-                    <button className='btn btn-primary w-25'>Manage Inventory</button>
+                    <button onClick={() => navigate('/manage-inventory')} className='btn btn-primary w-25'>Manage Inventory</button>
                 </div>
             </div>
         </section>

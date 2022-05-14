@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import Loading from '../Loading/Loading';
 
 
 const UpdateCycleDetails = () => {
@@ -15,7 +16,11 @@ const UpdateCycleDetails = () => {
         fetch(url)
             .then(res => res.json())
             .then(data => setCycle(data))
-    }, [updateCycle])
+    }, [updateCycle, id])
+    if (cycle === undefined) {
+        return <Loading />
+    }
+
     const { image, name, price, quantity, supplier, description } = cycle;
 
     const handleDelivery = async () => {
@@ -56,6 +61,8 @@ const UpdateCycleDetails = () => {
         }
         stockQuantity.current.value = ''
     }
+
+
 
 
     return (
