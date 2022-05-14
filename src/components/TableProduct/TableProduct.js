@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { Modal, Button } from 'react-bootstrap';
 import { FaTrash, FaEdit } from "react-icons/fa";
+import useManageProduct from './../useManageProduct';
 
 const TableProduct = ({ product, index }) => {
+    const [products, state, setProducts, setState] = useManageProduct()
     const [show, setShow] = useState(false);
     const { _id, image, name, price, quantity } = product;
 
@@ -14,8 +16,10 @@ const TableProduct = ({ product, index }) => {
         })
             .then(res => res.json())
             .then(data => {
-                if (data.acknowledge === true) {
-                    // TODO: product delet show
+                if (data.acknowledged === true) {
+                    const restProducts = products.filter(product => product._id !== id);
+                    setProducts(restProducts);
+                    setState(!state);
                 }
             });
         handleClose()

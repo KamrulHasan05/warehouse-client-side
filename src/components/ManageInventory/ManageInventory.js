@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Table } from 'react-bootstrap';
 import TableProduct from '../TableProduct/TableProduct';
 import useManageProduct from './../useManageProduct';
 
 const ManageInventory = () => {
-    const [products, setProducts] = useManageProduct([]);
-
+    const [products] = useManageProduct();
 
     return (
         <section>
