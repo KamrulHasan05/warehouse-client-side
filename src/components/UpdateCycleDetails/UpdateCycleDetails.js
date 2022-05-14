@@ -31,7 +31,7 @@ const UpdateCycleDetails = () => {
 
         const url = `http://localhost:5000/product/${id}`;
         const updateData = await axios.put(url, newCycle);
-        if (newCycle.quantity <= '0') {
+        if (newCycle.quantity < '0') {
             return alert('out of stock');
 
         }

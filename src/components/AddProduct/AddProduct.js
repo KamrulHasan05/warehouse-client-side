@@ -1,15 +1,40 @@
 import React, { useRef } from 'react';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import auth from './../../firebase.init';
 
 const AddProduct = () => {
-    const name = useRef('');
-    const price = useRef(0);
-    const quantity = useRef(0);
-    const supplier = useRef('');
-    const description = useRef('');
-    const imageUrl = useRef('');
+    const [user] = useAuthState(auth);
+    const nameRef = useRef('');
+    const priceRef = useRef(0);
+    const quantityRef = useRef(0);
+    const supplierRef = useRef('');
+    const descriptionRef = useRef('');
+    const imageUrlRef = useRef('');
 
     const handleSubmit = event => {
         event.preventDefault();
+        const email = user?.email
+        const name = nameRef.current.value;
+        const price = priceRef.current.value;
+        const quantity = quantityRef.current.value;
+        const supplier = supplierRef.current.value;
+        const description = descriptionRef.current.value;
+        const image = imageUrlRef.current.value;
+
+        const data = { name, price, quantity, supplier, description, image, email };
+
+        const url = 'http://localhost:5000/product'
+        fetch(url, {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        })
+            .then(res => res.json())
+            .then(data => console.log(data))
+
+
     }
 
     return (
@@ -21,27 +46,27 @@ const AddProduct = () => {
                         <form className='form' onSubmit={handleSubmit}>
                             <div className="form-group mb-3">
                                 <label htmlFor="name">Product Name</label>
-                                <input className="form-control" type="text" ref={name} id="name" placeholder='product name' />
+                                <input className="form-control" type="text" ref={nameRef} id="name" placeholder='product name' />
                             </div>
                             <div className="form-group mb-3">
                                 <label htmlFor="price">Product Price</label>
-                                <input className="form-control" type="number" min='0' ref={price} id="price" placeholder='product price' />
+                                <input className="form-control" type="number" min='0' ref={priceRef} id="price" placeholder='product price' />
                             </div>
                             <div className="form-group mb-3">
                                 <label htmlFor="quantity">Product Quantity</label>
-                                <input className="form-control" type="number" min='0' ref={quantity} id="quantity" placeholder='product quantity' />
+                                <input className="form-control" type="number" min='0' ref={quantityRef} id="quantity" placeholder='product quantity' />
                             </div>
                             <div className="form-group mb-3">
                                 <label htmlFor="supplier">Supplier Name</label>
-                                <input className="form-control" type="text" ref={supplier} id="supplier" placeholder='product supplier name' />
+                                <input className="form-control" type="text" ref={supplierRef} id="supplier" placeholder='product supplier name' />
                             </div>
                             <div className="form-group mb-3">
                                 <label htmlFor="description">Product Description</label>
-                                <textarea className='form-control' ref={description} id="description" rows="5" placeholder='product description'></textarea>
+                                <textarea className='form-control' ref={descriptionRef} id="description" rows="5" placeholder='product description'></textarea>
                             </div>
                             <div className="form-group mb-3">
                                 <label htmlFor="image">Product Image</label>
-                                <input type="text" ref={imageUrl} id="image" className='form-control' />
+                                <input type="text" ref={imageUrlRef} id="image" className='form-control' />
                             </div>
                             <div className="form-group mb-3">
                                 <input type="submit" value="Add Product" className='btn btn-primary' />
