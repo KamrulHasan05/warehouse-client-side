@@ -34,7 +34,6 @@ const AddProduct = () => {
             .then(res => res.json())
             .then(data => console.log(data))
 
-
     }
 
     return (
