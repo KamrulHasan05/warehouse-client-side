@@ -5,9 +5,7 @@ import { useCreateUserWithEmailAndPassword, useUpdateProfile, useSignInWithGoogl
 import auth from '../../firebase.init';
 import { useNavigate, Link } from 'react-router-dom';
 import { FaGoogle } from 'react-icons/fa';
-// import { ToastContainer, toast } from 'react-toastify';
-
-// import 'react-toastify/dist/ReactToastify.css';
+import { toast } from 'react-toastify';
 
 const Signup = () => {
     const [agree, setAgree] = useState(false);
@@ -24,7 +22,7 @@ const Signup = () => {
 
     const navigate = useNavigate()
     if (createUserError || GoogleError || updateError) {
-        // toast.error(`${createUserError ? createUserError.message : ''}${GoogleError ? GoogleError.message : ''}${updateError ? updateError.message : ''}`)
+        toast.error(`${createUserError ? createUserError.message : ''}${GoogleError ? GoogleError.message : ''}${updateError ? updateError.message : ''}`)
     }
     if (loading || updating || GoogleLoading) {
         return <Loading />;
@@ -56,7 +54,7 @@ const Signup = () => {
                 <div className="row">
                     <div className="col-md-6 offset-md-3">
                         <div className="form-container">
-                            <h2 className='text-success text-center mb-4'>Sign Up Here</h2>
+                            <h2 className=' text-center mb-4'>Sign Up Here</h2>
                             <Form onSubmit={handleRegister}>
                                 <Form.Group className="mb-3" >
                                     <Form.Label>Name</Form.Label>

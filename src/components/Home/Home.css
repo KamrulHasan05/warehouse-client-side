@@ -31,3 +31,13 @@ p {
     -ms-border-radius: 4px;
     -o-border-radius: 4px;
 }
+
+@media (max-width: 576px) {
+    .banner-section {
+        height: calc(50vh);
+    }
+
+    .img-height {
+        height: 100% !important;
+    }
+}

@@ -9,7 +9,7 @@ const SingleCycle = ({ cycle }) => {
             <Card style={{
                 minHeight: '628px'
             }}>
-                <Card.Img variant="top" src={image} style={{ height: '278px', objectFit: 'contain' }} />
+                <Card.Img variant="top" className='img-height' src={image} style={{ height: '278px', objectFit: 'contain' }} />
                 <Card.Body>
                     <Card.Title>{name}</Card.Title>
                     <Card.Title>Price: {price}</Card.Title>

@@ -72,7 +72,7 @@ const Login = () => {
                 <div className="row">
                     <div className="col-md-6 offset-md-3">
                         <div className="form-container">
-                            <h2 className='text-success text-center mb-4'>Log in Here</h2>
+                            <h2 className=' text-center mb-4'>Log in Here</h2>
                             <Form onSubmit={handleLogin}>
 
                                 <Form.Group className="mb-3" >

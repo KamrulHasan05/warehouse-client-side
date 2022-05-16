@@ -7,24 +7,28 @@ import { signOut } from 'firebase/auth';
 
 
 const Header = () => {
-    const [user, loading, error] = useAuthState(auth);
+    const [user] = useAuthState(auth);
 
     return (
         <header>
-            <Navbar bg="primary" variant="dark">
+            <Navbar expand="lg" bg="primary" variant="dark">
                 <Container>
                     <Navbar.Brand as={Link} to='/'>Cycle Mart</Navbar.Brand>
-                    <Nav className="ms-auto">
-                        <Nav.Link as={Link} to='/'>Home</Nav.Link>
-                        <Nav.Link as={Link} to='/myproduct'>My Products</Nav.Link>
-                        <Nav.Link as={Link} to='/manage-inventory'>Manage Inventory</Nav.Link>
-                        <Nav.Link as={Link} to='/add-product'>Add Product</Nav.Link>
+                    <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+                    <Navbar.Collapse id="responsive-navbar-nav">
+                        <Nav className="ms-auto">
+                            <Nav.Link as={Link} to='/'>Home</Nav.Link>
+                            <Nav.Link as={Link} to='/myproduct'>My Products</Nav.Link>
+                            <Nav.Link as={Link} to='/manage-inventory'>Manage Inventory</Nav.Link>
+                            <Nav.Link as={Link} to='/add-product'>Add Product</Nav.Link>
+                            <Nav.Link as={Link} to='/blog'>Blog</Nav.Link>
 
-                        {user?.email ? <Nav.Link as={Link} to='#' onClick={() => signOut(auth)}>Logout</Nav.Link>
-                            :
-                            <Nav.Link as={Link} to='/login'>Login</Nav.Link>
-                        }
-                    </Nav>
+                            {user?.email ? <Nav.Link as={Link} to='#' onClick={() => signOut(auth)}>Logout</Nav.Link>
+                                :
+                                <Nav.Link as={Link} to='/login'>Login</Nav.Link>
+                            }
+                        </Nav>
+                    </Navbar.Collapse>
                 </Container>
             </Navbar>
         </header>
