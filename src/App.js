@@ -9,6 +9,9 @@ import UpdateCycleDetails from './components/UpdateCycleDetails/UpdateCycleDetai
 import ManageInventory from './components/ManageInventory/ManageInventory';
 import AddProduct from './components/AddProduct/AddProduct';
 import MyProduct from './components/MyProduct/MyProduct';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import RequireAuth from './components/RequireAuth/RequireAuth';
 
 function App() {
   return (
@@ -16,14 +19,32 @@ function App() {
       <Header />
       <Routes>
         <Route path='/' element={<Home />}></Route>
-        <Route path='/update-details/:id' element={<UpdateCycleDetails />}></Route>
-        <Route path='/manage-inventory' element={<ManageInventory />}></Route>
-        <Route path='/add-product' element={<AddProduct />}></Route>
-        <Route path='/myproduct' element={<MyProduct />}></Route>
+
+        <Route path='/update-details/:id' element={
+          <RequireAuth>
+            <UpdateCycleDetails />
+          </RequireAuth>
+        }></Route>
+        <Route path='/manage-inventory' element={
+          <RequireAuth>
+            <ManageInventory />
+          </RequireAuth>
+        }></Route>
+        <Route path='/add-product' element={
+          <RequireAuth>
+            <AddProduct />
+          </RequireAuth>
+        }></Route>
+        <Route path='/myproduct' element={
+          <RequireAuth>
+            <MyProduct />
+          </RequireAuth>
+        }></Route>
         <Route path='/login' element={<Login />}></Route>
         <Route path='/signup' element={<Signup />}></Route>
       </Routes>
       <Footer />
+      <ToastContainer />
     </>
   );
 }

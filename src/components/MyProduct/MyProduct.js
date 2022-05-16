@@ -41,11 +41,17 @@ const MyProduct = () => {
                 <h2 className='text-center mb-4'>My Items</h2>
                 <div className="row">
                     {
-                        myproducts.map(product => <ShowMyProduct
-                            key={product._id}
-                            product={product}
-                            handleShow={handleShow}
-                        />)
+                        myproducts.length < 0 ?
+                            myproducts.map(product => <ShowMyProduct
+                                key={product._id}
+                                product={product}
+                                handleShow={handleShow}
+                            />)
+                            :
+                            <div className='alert alert-info'>
+                                <h3 className='text-center'>You don't add any Product, please add product first.</h3>
+                            </div>
+
                     }
                     <Modal show={show} onHide={handleClose}>
                         <Modal.Header closeButton>

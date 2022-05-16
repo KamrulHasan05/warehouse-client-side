@@ -5,6 +5,7 @@ import { FaGoogle } from "react-icons/fa";
 import auth from '../../firebase.init';
 import { useSendPasswordResetEmail, useSignInWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
 import Loading from '../Loading/Loading';
+import { toast } from 'react-toastify';
 
 const Login = () => {
 
@@ -15,7 +16,7 @@ const Login = () => {
         error,
     ] = useSignInWithEmailAndPassword(auth);
 
-    const [signInWithGoogle, googleUser, GoogleLoading, GoogleError] = useSignInWithGoogle(auth);
+    const [signInWithGoogle, googleUser, googleLoading, googleError] = useSignInWithGoogle(auth);
 
 
     const [sendPasswordResetEmail, sending, resetError] = useSendPasswordResetEmail(auth);
@@ -31,11 +32,16 @@ const Login = () => {
     const from = location?.state?.from?.pathname || '/'
 
 
-    if (loading || GoogleLoading) {
+    if (loading || googleLoading) {
         return <Loading />
     }
+
+    if (error || googleError || resetError) {
+        toast.error(error?.message, googleError?.message, resetError?.message)
+    }
+
     if (sending) {
-        // toast.success('Reset Email Sent')
+        toast.success('Reset Email Sent')
     }
     // navigate after login
     if (user || googleUser) {
@@ -57,7 +63,7 @@ const Login = () => {
         if (email) {
             sendPasswordResetEmail(email)
         }
-        // toast.error('Please Enter your email')
+        toast.error('Please Enter your email')
     }
 
     return (
