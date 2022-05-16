@@ -1,7 +1,9 @@
 import React from 'react';
 import { Card } from 'react-bootstrap';
+import { FaTrash } from "react-icons/fa";
 
-const ShowMyProduct = ({ product }) => {
+
+const ShowMyProduct = ({ product, handleShow }) => {
     const { _id, image, name, price, supplier, quantity, description } = product
     return (
         <div className='col-md-4'>
@@ -19,7 +21,7 @@ const ShowMyProduct = ({ product }) => {
                     <h5><small>Supplier: {supplier}</small></h5>
                 </Card.Body>
                 <Card.Footer className='bg-danger'>
-                    <button className='btn text-white fw-bold w-100'>Delete Product</button>
+                    <button className='btn text-white fw-bold w-100 d-flex align-items-center justify-content-center' onClick={() => handleShow(_id)}><FaTrash className='me-3' /> Delete Product</button>
                 </Card.Footer>
             </Card>
         </div>
