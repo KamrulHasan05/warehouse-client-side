@@ -10,6 +10,7 @@ const Header = () => {
                     <Navbar.Brand as={Link} to='/'>Cycle Mart</Navbar.Brand>
                     <Nav className="ms-auto">
                         <Nav.Link as={Link} to='/'>Home</Nav.Link>
+                        <Nav.Link as={Link} to='/myproduct'>My Products</Nav.Link>
                         <Nav.Link as={Link} to='/login'>Login</Nav.Link>
                     </Nav>
                 </Container>

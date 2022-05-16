@@ -8,6 +8,7 @@ import Signup from './components/Signup/Signup';
 import UpdateCycleDetails from './components/UpdateCycleDetails/UpdateCycleDetails';
 import ManageInventory from './components/ManageInventory/ManageInventory';
 import AddProduct from './components/AddProduct/AddProduct';
+import MyProduct from './components/MyProduct/MyProduct';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route path='/update-details/:id' element={<UpdateCycleDetails />}></Route>
         <Route path='/manage-inventory' element={<ManageInventory />}></Route>
         <Route path='/add-product' element={<AddProduct />}></Route>
+        <Route path='/myproduct' element={<MyProduct />}></Route>
         <Route path='/login' element={<Login />}></Route>
         <Route path='/signup' element={<Signup />}></Route>
       </Routes>
