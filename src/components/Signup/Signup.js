@@ -6,6 +6,7 @@ import auth from '../../firebase.init';
 import { useNavigate, Link } from 'react-router-dom';
 import { FaGoogle } from 'react-icons/fa';
 import { toast } from 'react-toastify';
+import useToken from '../useToken';
 
 const Signup = () => {
     const [agree, setAgree] = useState(false);
@@ -20,6 +21,8 @@ const Signup = () => {
     const [updateProfile, updating, updateError] = useUpdateProfile(auth);
     const [signInWithGoogle, googleUser, GoogleLoading, GoogleError] = useSignInWithGoogle(auth);
 
+    const [token] = useToken(user || googleUser)
+
     const navigate = useNavigate()
     if (createUserError || GoogleError || updateError) {
         toast.error(`${createUserError ? createUserError.message : ''}${GoogleError ? GoogleError.message : ''}${updateError ? updateError.message : ''}`)
@@ -28,9 +31,8 @@ const Signup = () => {
         return <Loading />;
     }
 
-    if (user || googleUser) {
+    if (token) {
         navigate('/')
-        console.log(user);
     }
     const handleRegister = async (event) => {
         event.preventDefault()
@@ -41,10 +43,12 @@ const Signup = () => {
         if (password === confirmPassword) {
             await createUserWithEmailAndPassword(email, password);
             await updateProfile({ displayName: name });
+            toast.success('email verification is sent, please, check your email inbox or spam folder')
             setError('');
         }
         else {
             setError("password no match")
+
         }
     }
 
@@ -96,7 +100,6 @@ const Signup = () => {
                             <div className='text-center mt-5'>
                                 <button className='btn btn-primary w-100' onClick={() => signInWithGoogle()}><FaGoogle className='me-3' /> Log in with Google</button>
                             </div>
-                            {/* <ToastContainer /> */}
                         </div>
                     </div>
                 </div>

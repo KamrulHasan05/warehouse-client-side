@@ -3,6 +3,7 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import ShowMyProduct from '../ShowMyProduct/ShowMyProduct';
 import auth from './../../firebase.init';
 import { Modal, Button } from 'react-bootstrap';
+import { toast } from 'react-toastify';
 
 const MyProduct = () => {
     const [show, setShow] = useState(false);
@@ -11,21 +12,29 @@ const MyProduct = () => {
     const [deleteId, setDeleteId] = useState('')
 
     const email = user?.email;
-    const url = `http://localhost:5000/myitems?email=${email}`;
+    const url = `https://frozen-plains-21715.herokuapp.com/myitems?email=${email}`;
     useEffect(() => {
-        fetch(url)
+        fetch(url, {
+            headers: {
+                authorization: `bearer ${localStorage.getItem('accessToken')}`
+            }
+        })
             .then(res => res.json())
             .then(data => setMyProducts(data))
     }, [email, url, myproducts])
 
     const handleDelete = id => {
         const handleClose = () => setShow(false);
-        const url = `http://localhost:5000/product/${id}`;
+        const url = `https://frozen-plains-21715.herokuapp.com/product/${id}`;
         fetch(url, {
             method: 'DELETE'
         })
             .then(res => res.json())
-            .then(data => console.log(data));
+            .then(data => {
+                if (data.acknowledged === true) {
+                    toast.success('Product delete successful')
+                }
+            });
         handleClose()
     }
 
@@ -41,7 +50,7 @@ const MyProduct = () => {
                 <h2 className='text-center mb-4'>My Items</h2>
                 <div className="row">
                     {
-                        myproducts.length < 0 ?
+                        myproducts.length > 0 ?
                             myproducts.map(product => <ShowMyProduct
                                 key={product._id}
                                 product={product}

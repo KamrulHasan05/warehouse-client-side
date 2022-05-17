@@ -24,7 +24,7 @@ const AddProduct = () => {
 
         const data = { name, price, quantity, supplier, description, image, email };
 
-        const url = 'http://localhost:5000/product'
+        const url = 'https://frozen-plains-21715.herokuapp.com/product'
         fetch(url, {
             method: "POST",
             headers: {

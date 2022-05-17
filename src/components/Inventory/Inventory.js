@@ -8,7 +8,7 @@ const Inventory = () => {
     const navigate = useNavigate()
 
     useEffect(() => {
-        fetch('http://localhost:5000/product')
+        fetch('https://frozen-plains-21715.herokuapp.com/product')
             .then(res => res.json())
             .then(data => setCycles(data))
     }, [])

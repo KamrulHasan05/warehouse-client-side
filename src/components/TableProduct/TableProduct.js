@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Modal, Button } from 'react-bootstrap';
 import { FaTrash, FaEdit } from "react-icons/fa";
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const TableProduct = ({ product, index }) => {
 
@@ -12,12 +13,16 @@ const TableProduct = ({ product, index }) => {
 
     const handleDelete = id => {
         const handleClose = () => setShow(false);
-        const url = `http://localhost:5000/product/${id}`;
+        const url = `https://frozen-plains-21715.herokuapp.com/product/${id}`;
         fetch(url, {
             method: 'DELETE'
         })
             .then(res => res.json())
-            .then(data => console.log(data));
+            .then(data => {
+                if (data.acknowledged === true) {
+                    toast.success('Product delete successful')
+                }
+            });
         handleClose()
     }
 

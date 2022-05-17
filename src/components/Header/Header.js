@@ -18,12 +18,15 @@ const Header = () => {
                     <Navbar.Collapse id="responsive-navbar-nav">
                         <Nav className="ms-auto">
                             <Nav.Link as={Link} to='/'>Home</Nav.Link>
-                            <Nav.Link as={Link} to='/myproduct'>My Products</Nav.Link>
-                            <Nav.Link as={Link} to='/manage-inventory'>Manage Inventory</Nav.Link>
-                            <Nav.Link as={Link} to='/add-product'>Add Product</Nav.Link>
-                            <Nav.Link as={Link} to='/blog'>Blog</Nav.Link>
+                            {user?.email ? <>
+                                <Nav.Link as={Link} to='/myproduct'>My Products</Nav.Link>
+                                <Nav.Link as={Link} to='/manage-inventory'>Manage Inventory</Nav.Link>
+                                <Nav.Link as={Link} to='/add-product'>Add Product</Nav.Link>
+                                <Nav.Link as={Link} to='/blog'>Blog</Nav.Link>
 
-                            {user?.email ? <Nav.Link as={Link} to='#' onClick={() => signOut(auth)}>Logout</Nav.Link>
+                                <Nav.Link as={Link} to='#' onClick={() => signOut(auth)}>Logout</Nav.Link>
+                                <p style={{ margin: '0', color: 'white', lineHeight: '40px' }}>{user?.displayName}</p>
+                            </>
                                 :
                                 <Nav.Link as={Link} to='/login'>Login</Nav.Link>
                             }

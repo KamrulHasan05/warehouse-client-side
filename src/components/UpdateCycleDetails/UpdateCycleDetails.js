@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useEffect, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import Loading from '../Loading/Loading';
+import { toast } from 'react-toastify';
 
 
 const UpdateCycleDetails = () => {
@@ -12,7 +13,7 @@ const UpdateCycleDetails = () => {
     const stockQuantity = useRef('');
 
     useEffect(() => {
-        const url = `http://localhost:5000/product/${id}`;
+        const url = `https://frozen-plains-21715.herokuapp.com/product/${id}`;
         fetch(url)
             .then(res => res.json())
             .then(data => setCycle(data))
@@ -29,15 +30,16 @@ const UpdateCycleDetails = () => {
         const newQuantity = quantity - 1;
         newCycle.quantity = JSON.stringify(newQuantity);
 
-        const url = `http://localhost:5000/product/${id}`;
+        const url = `https://frozen-plains-21715.herokuapp.com/product/${id}`;
         const updateData = await axios.put(url, newCycle);
         if (newCycle.quantity < '0') {
-            return alert('out of stock');
+            return toast.error('out of stock');
 
         }
         else {
             if (updateData.data.acknowledged === true) {
                 setUpdateCycle(!updateCycle)
+                toast.success('Product deliveried')
             }
         }
     }
@@ -49,14 +51,15 @@ const UpdateCycleDetails = () => {
         const newQuantity = quantity + parseInt(newStock);
         newCycle.quantity = JSON.stringify(newQuantity);
 
-        const url = `http://localhost:5000/product/${id}`;
+        const url = `https://frozen-plains-21715.herokuapp.com/product/${id}`;
         const updateData = await axios.put(url, newCycle);
         if (newCycle.quantity <= '0') {
-            alert('out of stock')
+            return toast.error('do not use negative value')
         }
         else {
             if (updateData.data.acknowledged === true) {
                 setUpdateCycle(!updateCycle)
+                toast.success('Product Stock Successful')
             }
         }
         stockQuantity.current.value = ''
