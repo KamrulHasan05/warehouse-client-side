@@ -1,6 +1,6 @@
-# BD MOTORS
+# CYCLE MART
 
-BD MOTORS LIVE SITE LINK [BD MOTORS]().
+CYCLE MART LIVE SITE LINK [CYCLE MART](https://cycle-warehouse-1d78b.web.app/).
 
 ## feature in this project
 
